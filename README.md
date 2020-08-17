@@ -8,7 +8,7 @@ Developed as a part of an Open Source Focus RS tuning stack but should be useful
 ```
 $ ./vbflasher.py can0 /tmp/E3B1-14C039-AA.vbf /tmp/G1FC-14C036-AF.vbf /tmp/G1FC-14C381-AF.vbf
 ```
-#### Custom RDU calibration (170C temp lmit) 
+#### Custom RDU calibration (170C temp limit) 
 
 ##### Extract binary
 ```
