@@ -3,6 +3,11 @@ A set of tools to edit and flash both factory and custom made VBF files using a 
 
 Developed as a part of an Open Source Focus RS tuning stack but should be useful with many other models as well.
 
+## Install
+```
+$ pip3 install can pyserial crccheck
+```
+
 ## Example usage
 #### Update ABS module on a Ford Focus RS mk3
 ```
