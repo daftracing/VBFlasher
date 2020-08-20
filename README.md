@@ -8,6 +8,9 @@ Developed as a part of an Open Source Focus RS tuning stack but should be useful
 $ pip3 install can pyserial crccheck
 ```
 
+## Code reuse
+It can be used as a module to provide ISOTP implementation and UDS functionalities including SecurityAccess 
+
 ## Example usage
 #### Update ABS module on a Ford Focus RS mk3
 ```
