@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 """
-FIXME: We don't care about the VBF file checksums for now -> will use vbflasher anyway
-
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, either version 3 of the License, or (at your option) any later
@@ -176,9 +174,10 @@ if __name__ == '__main__':
 
 		f = open(path, 'rb')
 		data = f.read()
-		blocks.append([addr, size, bytearray(data)])
+		crc = Crc16CcittFalse.calc(data)
+		blocks.append([addr, size, bytearray(data), crc])
 
-		print("\t[+] Adding 0x{:x} bytes block from {} at 0x{:08x}".format(path.stat().st_size, path, addr))
+		print("\t[+] Adding 0x{:x} bytes block (CRC 0x{:04x}) from {} at 0x{:08x}".format(path.stat().st_size, crc, path, addr))
 
 	body = str()
 
@@ -222,5 +221,5 @@ if __name__ == '__main__':
 		for b in blocks:
 			f.write(pack('>II', b[0], b[1]))
 			f.write(b[2])
-			f.write(b'AA')
+			f.write(pack('>H', b[3]))
 
