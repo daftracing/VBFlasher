@@ -174,10 +174,9 @@ if __name__ == '__main__':
 
 		f = open(path, 'rb')
 		data = f.read()
-		crc = Crc16CcittFalse.calc(data)
-		blocks.append([addr, size, bytearray(data), crc])
+		blocks.append([addr, size, bytearray(data)])
 
-		print("\t[+] Adding 0x{:x} bytes block (CRC 0x{:04x}) from {} at 0x{:08x}".format(path.stat().st_size, crc, path, addr))
+		print("\t[+] Adding 0x{:x} bytes block from {} at 0x{:08x}".format(path.stat().st_size, path, addr))
 
 	body = str()
 
@@ -215,11 +214,14 @@ if __name__ == '__main__':
 	if args.fix_checksum:
 		fix_checksum(args.sw, blocks)
 
-	print("\n[+] Writing {} ...".format(args.out))
+	print("\n[ ] Writing {} ...".format(args.out), end='')
 	with open(args.out, 'wb') as f:
 		f.write(header.encode("ASCII"))
 		for b in blocks:
+			crc = Crc16CcittFalse.calc(b[2])
+			print("\n\t[ ] 0x{:x} bytes block (CRC 0x{:04x}) at 0x{:08x}... ".format(b[1], crc, b[0]), end='')
 			f.write(pack('>II', b[0], b[1]))
 			f.write(b[2])
-			f.write(pack('>H', b[3]))
-
+			f.write(pack('>H', crc))
+			print("OK\r\t[+", end='')
+		print('\n[+] Done')
