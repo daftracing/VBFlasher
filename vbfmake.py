@@ -133,6 +133,7 @@ def ck_g1f7_14c366(blocks):
 def fix_checksum(sw, blocks):
 	algos = {
 		"G1F7-14C366": ck_g1f7_14c366,
+		"HP57-14C366": ck_g1f7_14c366,
 		"G1F7-14C367": ck_g1f7_14c367
 	}
 
