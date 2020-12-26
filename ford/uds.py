@@ -181,7 +181,7 @@ class Ecu:
 			try:
 				magic = fixedbytes[self.ecuid][level]
 			except KeyError as e:
-				return False, "[!] Failed! No magic bytes for 0x{:x} level 0x{:2x} found. Aborting.".format(self.ecuid, level)
+				return False, "[!] Failed! No magic bytes for 0x{:x} level 0x{:02x} found. Aborting.".format(self.ecuid, level)
 			debug("\t[+] Magic bytes: 0x{:x}".format(magic))
 			key = keygen(seed, magic)
 			keystr = ' '.join(map('{:02x}'.format, key))
@@ -211,8 +211,8 @@ fixedbytes = {
 	0x726: {0x01: 0xfaa8bd, 0x11: 0x128665},
 	0x727: {0x03: 0x4ad0fb},
 	0x730: {0x01: 0x9b2533},
-	0x731: {0x11: 0x462A71},
-	0x760: {0x01: 0x582613, 0x03: 0x76807f, 0x11: 0x06316B}
+	0x731: {0x01: 0x672a70, 0x11: 0x462a71},
+	0x760: {0x01: 0x582613, 0x03: 0x76807f, 0x11: 0x06316b}
 }
 
 def keygen(seed, fixed):

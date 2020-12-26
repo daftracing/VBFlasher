@@ -68,9 +68,9 @@ class Vbflasher:
 				self.ecuid = self.data.ecuid
 
 		if self.ecuid:
-			if not tccheck(can_interface):
-				die("[!] Please set {} qdisc to pfifo_fast. Now it's too risky to continue...")
 			self.ecu = Ecu(can_interface=can_interface, ecuid=self.ecuid)
+			if not tccheck(can_interface):
+				die("[!] Please set {} qdisc to pfifo_fast. Now it's too risky to continue...".format(can_interface))
 		else:
 			die("[!] No valid VBF loaded...")
 
@@ -230,7 +230,7 @@ class Vbflasher:
 
 
 def usage(str):
-	print('usage: {} intercace sbl_file.vbf strategy_file.vbf calibration_file.vbf'.format(str))
+	print('usage: {} interface sbl_file.vbf strategy_file.vbf calibration_file.vbf'.format(str))
 
 
 def debug(str, end="\n"):
@@ -254,7 +254,7 @@ if __name__ == '__main__':
 	data_path = sys.argv[4]
 
 	try:
-		flasher = Vbflasher(can_interface = iface, sbl_path=sbl_path, exe_path=exe_path, data_path=data_path)
+		flasher = Vbflasher(can_interface=iface, sbl_path=sbl_path, exe_path=exe_path, data_path=data_path)
 	except OSError as e:
 		enum = e.args[0]
 		if enum == 19:
